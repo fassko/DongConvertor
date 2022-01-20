@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
+  // variable that will keep the vietnamese dong value
   @State var vietnameseDong = ""
+  
+  // variable that will keep eur value
   @State var eur = ""
   
   var body: some View {
@@ -92,24 +95,27 @@ struct ContentView: View {
     }
   }
   
+  // converting from DONG to EUR
   func convert() {
+    // convert to number from text
     guard let vdnValue = Double(vietnameseDong) else {
       eur = "0"
       return
     }
     
-    let eurValue = vdnValue * 0.000037
+    // current currency rate is 0.000039 from VDN to EUR
+    let eurValue = vdnValue * 0.000039
     
     eur = formatCurrency(value: eurValue)
   }
   
+  // formatting currency
   func formatCurrency(value: Double) -> String {
     let numberFormatter = NumberFormatter()
-    numberFormatter.usesGroupingSeparator = true
-    numberFormatter.currencyCode = ""
-    numberFormatter.minimumFractionDigits = 2
-    numberFormatter.maximumFractionDigits = 2
+    numberFormatter.minimumFractionDigits = 2 // min decimals
+    numberFormatter.maximumFractionDigits = 2 // max decimals
     
+    // return value in case something is wrong we will return empty text ""
     return numberFormatter.string(from: NSNumber(value: value)) ?? ""
   }
 }
