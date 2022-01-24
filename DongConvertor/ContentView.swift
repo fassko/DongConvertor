@@ -22,11 +22,16 @@ struct ContentView: View {
         Spacer()
         
         HStack(spacing: 20) {
+          // image from assets catalog that we imported
           Image("vietnam-flag")
             .resizable()
             .scaledToFit()
             .frame(height: 80)
           
+          // alignement from left
+          // leading is where text starts
+          // for us it is from the left
+          // for arabic it is right to left
           VStack(alignment: .leading) {
             Text("VDN")
               .font(.largeTitle.weight(.semibold))
@@ -36,9 +41,11 @@ struct ContentView: View {
             
             TextField("VDN", text: $vietnameseDong)
               .font(.largeTitle)
+              // so the font becomes smaller with long numbers
               .minimumScaleFactor(0.2)
+              // minimum height of the text field
               .frame(minHeight: 45)
-              .foregroundColor(.black)
+              // so the keyboar has number entering
               .keyboardType(.decimalPad)
           }
         }
@@ -63,28 +70,26 @@ struct ContentView: View {
         .padding(.top, -30)
         .padding(.horizontal)
         
-        HStack {
-          HStack(spacing: 20) {
-            Image("eu-flag")
-              .resizable()
-              .scaledToFit()
-              .frame(height: 80)
+        HStack(spacing: 20) {
+          Image("eu-flag")
+            .resizable()
+            .scaledToFit()
+            .frame(height: 80)
+          
+          VStack(alignment: .leading) {
+            Text("EUR")
+              .font(.largeTitle.weight(.semibold))
             
-            VStack(alignment: .leading) {
-              Text("EUR")
-                .font(.largeTitle.weight(.semibold))
-              
-              Text("Euro")
-                .font(.title3)
-              
-              TextField("EUR", text: $eur)
-                .font(.largeTitle)
-                .minimumScaleFactor(0.2)
-                .frame(minHeight: 45)
-                .foregroundColor(.black)
-                .keyboardType(.decimalPad)
-                .disabled(true)
-            }
+            Text("Euro")
+              .font(.title3)
+            
+            TextField("EUR", text: $eur)
+              .font(.largeTitle)
+              .minimumScaleFactor(0.2)
+              .frame(minHeight: 45)
+              .keyboardType(.decimalPad)
+              // so users can't type inside there
+              .disabled(true)
           }
         }
         .padding(.top, 60)
@@ -101,7 +106,7 @@ struct ContentView: View {
   func convert() {
     // convert to number from text
     guard let vdnValue = Double(vietnameseDong) else {
-      eur = "0"
+      eur = formatCurrency(value: 0)
       return
     }
     
