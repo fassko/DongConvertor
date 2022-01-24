@@ -15,8 +15,9 @@ struct ContentView: View {
   @State var eur = ""
   
   var body: some View {
+    // main encolosure
+    // spacing later
     VStack(spacing: 0) {
-      
       VStack {
         Spacer()
         
@@ -91,6 +92,7 @@ struct ContentView: View {
         
         Spacer()
       }
+      // don't see color until we put something the VStack
       .background(Color.yellow.opacity(0.8))
     }
   }
