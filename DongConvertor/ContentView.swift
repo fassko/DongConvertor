@@ -105,15 +105,15 @@ struct ContentView: View {
   // converting from DONG to EUR
   func convert() {
     // convert to number from text
-    guard let vdnValue = Double(vietnameseDong) else {
+    if let vdnValue = Double(vietnameseDong) {
+      // current currency rate is 0.000039 from VDN to EUR
+      let eurValue = vdnValue * 0.000039
+      
+      eur = formatCurrency(value: eurValue)
+    } else {
       eur = formatCurrency(value: 0)
       return
     }
-    
-    // current currency rate is 0.000039 from VDN to EUR
-    let eurValue = vdnValue * 0.000039
-    
-    eur = formatCurrency(value: eurValue)
   }
   
   // formatting currency
